@@ -1,4 +1,7 @@
 # CuddleCare — Software Requirements Specification (SRS)
+**Version:** 1.0  
+**Author:** Hanan Fatih  
+**Date:** 28-09-2025
 
 ## 1. Introduction
 ### 1.1 Purpose
@@ -71,17 +74,55 @@ CuddleCare is a web-based platform connecting **parents/guardians** with **child
 ---
 
 ## 5. Data Requirements
-- Users: Name, email, password, role  
-- Children: Name, DOB, health info, academic progress  
-- Bookings: Date, time, service type, status  
-- Notifications: Message content, recipient, timestamp  
+- Users: Name, email, password, role, phone_no, address
+- Children: Name, DOB, health info, academic progress, allergies, medical_conditions 
+- Bookings: Date, time, service type, status, status (pending, confirmed, completed)
+- Notifications: Message content, recipient, timestamp, timestamp_sent, read_status
 
 ---
 
-## 6. Future Enhancements
+## 6. Glossary
+- **CRUD:** Create, Read, Update, Delete  
+- **Dashboard:** A user interface showing relevant data and actions  
+- **Booking:** Reservation of childcare service  
+- **Notification:** Alert message sent to a user  
+
+---
+
+## 7. Simple Use Case Diagram (Text-based)
+
+    +----------------+
+    |   Parent       |
+    +----------------+
+    | - Register     |
+    | - Login        |
+    | - Add Child    |
+    | - Book Service |
+    | - View Updates |
+    +----------------+
+           |
+           v
+    +----------------+
+    |  Childcare     |
+    |  Provider      |
+    +----------------+
+    | - Manage Child |
+    | - Record Data  |
+    | - Accept Book  |
+    +----------------+
+           |
+           v
+    +----------------+
+    |     Admin      |
+    +----------------+
+    | - Manage Users |
+    | - Approve Prov |
+    | - Reports      |
+    +----------------+
+
+---
+
+## 8. Future Enhancements
 - Mobile app version (React Native or Flutter)  
 - Payment integration for bookings  
-- Advanced reporting and analytics for admins  
-
----
-
+- Advanced reporting and analytics for admins 

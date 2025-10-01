@@ -45,6 +45,9 @@ The relational database stores system data in the following tables:
 - **Children Table**: Stores children’s profiles linked to parents/guardians.
 - **Bookings Table**: Stores booking details, status, and timestamps.
 - **Notifications Table**: Stores notifications for tracking and history.
+- **Providers**: Stores providers informations, services they give, and their approval status
+- **Activities**: Stores activities that the children may do in a given day
+- **Payments**: Stores information about payments whether it is paid, or pending or failed.
 
 ---
 
@@ -73,6 +76,6 @@ The system is designed with scalability in mind. Planned enhancements include:
 ### 7. System Architecture Diagram
 The following diagram illustrates the system components and their interactions.
 
-![CuddleCare System Architecture](image.png)
+![CuddleCare System Architecture](images/image.png)
 
 *Figure: System architecture for CuddleCare Childcare Booking System.*

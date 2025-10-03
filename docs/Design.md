@@ -46,6 +46,7 @@ The relational database stores system data in the following tables:
 - **Bookings Table**: Stores booking details, status, and timestamps.
 - **Notifications Table**: Stores notifications for tracking and history.
 - **Providers**: Stores providers informations, services they give, and their approval status
+- **Parents**: Store parents informations, emergency information.
 - **Activities**: Stores activities that the children may do in a given day
 - **Payments**: Stores information about payments whether it is paid, or pending or failed.
 

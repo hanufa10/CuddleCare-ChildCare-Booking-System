@@ -20,10 +20,9 @@ This schema defines the database structure for **CuddleCare**, a childcare booki
 | Column         | Type        | Constraints                  |
 |----------------|-------------|------------------------------|
 | user_id        | INT (PK)    | AUTO INCREMENT               |
-| full_name      | VARCHAR     | NOT NULL                     |
+| user_name      | VARCHAR     | NOT NULL                     |
 | email          | VARCHAR     | UNIQUE, NOT NULL             |
 | password_hash  | VARCHAR     | NOT NULL                     |
-| phone          | VARCHAR     | NULL                         |
 | role           | ENUM        | ('parent','provider','admin')|
 | created_at     | TIMESTAMP   | DEFAULT CURRENT_TIMESTAMP    |
 
@@ -55,21 +54,39 @@ This schema defines the database structure for **CuddleCare**, a childcare booki
 | approval_status| ENUM      | ('Approved', 'Rejected', 'Pending')   |
 
 ---
-
-### 4. Bookings
-| Column       | Type      | Constraints                            |
-|--------------|-----------|----------------------------------------|
-| booking_id   | INT (PK)  | AUTO INCREMENT                         |
-| child_id     | INT (FK)  | REFERENCES Children(child_id)          |
-| provider_id  | INT (FK)  | REFERENCES Providers(provider_id)      |
-| start_date   | DATE      | NOT NULL                               |
-| end_date     | DATE      | NULL                                   |
-| status       | ENUM      | ('pending','confirmed','cancelled')    |
-| created_at   | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP              |
+### 4. Parents
+| Column         | Type      | Constraints                           |
+|----------------|-----------|---------------------------------------|
+| parent_id      | INT (PK)  | AUTO INCREMENT                        |
+| user_id        | INT (FK)  | REFERENCES Users(user_id)             |
+| first_name     | VARCHAR   | NOT NULL                              |
+| last_name      | VARCHAR   | NOT NUL                               |
+| phone_no1      | VARCHAR   | NOT NUL                               |
+| phone_no2      | VARCHAR   | NOT NUL                               |
+| emergency_name | VARCHAR   | NOT NUL                               |
+| emergency_phone| VARCHAR   | NOT NUL                               |
+| address        | VARCHAR   | NOT NULL                              |
 
 ---
 
-### 5. Activities
+### 5. Bookings
+| Column        | Type      | Constraints                                           |
+|---------------|-----------|-------------------------------------------------------|
+| booking_id    | INT (PK)  | AUTO INCREMENT                                        |
+| child_id      | INT (FK)  | REFERENCES Children(child_id)                         |
+| provider_id   | INT (FK)  | REFERENCES Providers(provider_id)                     |
+| start_date    | DATE      | NOT NULL                                              |
+| end_date      | DATE      | NULL                                                  |
+| amount        | DECIMAL   | NOT NULL                                              |
+| commission_fee| DECIMAL   | NOT NULL                                              |
+| provider_earn | DECIMAL   | NOT NULL                                              |
+| status        | ENUM      | ('pending','confirmed','cancelled')                   |
+| created_at    | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP                             |
+| updated_at    | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP |
+
+---
+
+### 6. Activities
 | Column       | Type      | Constraints                                     |
 |--------------|-----------|-------------------------------------------------|
 | activity_id  | INT (PK)  | AUTO INCREMENT                                  |
@@ -82,19 +99,24 @@ This schema defines the database structure for **CuddleCare**, a childcare booki
 
 ---
 
-### 6. Payments
-| Column       | Type      | Constraints                            |
-|--------------|-----------|----------------------------------------|
-| payment_id   | INT (PK)  | AUTO INCREMENT                         |
-| booking_id   | INT (FK)  | REFERENCES Bookings(booking_id)        |
-| amount       | DECIMAL   | NOT NULL                               |
-| method       | ENUM      | ('card','cash','mobile_money')         |
-| status       | ENUM      | ('paid','pending','failed')            |
-| paid_at      | TIMESTAMP | NULL                                   |
+### 7. Payments
+| Column       | Type      | Constraints                                            |
+|--------------|-----------|--------------------------------------------------------|
+| payment_id   | INT (PK)  | AUTO INCREMENT                                         |
+| booking_id   | INT (FK)  | REFERENCES Bookings(booking_id)                        |
+| payer_id     | INT (FK)  | REFERENCES Users(user_id)                              |
+| payee_id     | INT (FK)  | REFERENCES Users(user_id)                              |
+| amount       | DECIMAL   | NOT NULL                                               |
+| method       | ENUM      | ('card','cash','mobile_money')                         |
+| payment_type | ENUM      | ('ParentToProvider', 'ProviderToPlatform')             |
+| status       | ENUM      | ('paid','pending','failed')                            |
+| paid_at      | TIMESTAMP | NULL                                                   |
+| created_at   | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP                              |
+| updated_at   | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP  |
 
 ---
 
-### 7. Notifications
+### 8. Notifications
 | Column        | Type      | Constraints                            |
 |---------------|-----------|----------------------------------------|
 | notification_id| INT (PK) | AUTO INCREMENT                         |
@@ -108,8 +130,9 @@ This schema defines the database structure for **CuddleCare**, a childcare booki
 ---
 
 ## Relationships
-- **Users → Children**: 1-to-many  
+- **Parent → Children**: 1-to-many  
 - **Users → Providers**: 1-to-1 (provider must be a user)  
+- **Users → Parents**: 1-to-1 (parent must be a user)  
 - **Children → Bookings**: 1-to-many  
 - **Providers → Bookings**: 1-to-many  
 - **Bookings → Payments**: 1-to-many  

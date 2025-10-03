@@ -126,3 +126,4 @@ CuddleCare is a web-based platform connecting **parents/guardians** with **child
 - Mobile app version (React Native or Flutter)  
 - Payment integration for bookings  
 - Advanced reporting and analytics for admins 
+- ai chat bot

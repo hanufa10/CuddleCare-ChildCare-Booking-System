@@ -34,8 +34,9 @@ This schema defines the database structure for **CuddleCare**, a childcare booki
 | child_id      | INT (PK)  | AUTO INCREMENT                        |
 | parent_id     | INT (FK)  | REFERENCES Users(user_id)             |
 | full_name     | VARCHAR   | NOT NULL                              |
+| age           | INT       | NOT NULL                              |
 | dob           | DATE      | NOT NULL                              |
-| gender        | ENUM      | ('male','female','other')             |
+| gender        | ENUM      | ('male','female')                     |
 | allergies     | TEXT      | NULL                                  |
 | special_needs | TEXT      | NULL                                  |
 
@@ -52,6 +53,7 @@ This schema defines the database structure for **CuddleCare**, a childcare booki
 | services       | VARCHAR   | (daycare, babysitting, tutoring)      |
 | capacity       | INT       | NULL                                  |
 | approval_status| ENUM      | ('Approved', 'Rejected', 'Pending')   |
+| rating         | INT       | NULL                                  |
 
 ---
 ### 4. Parents
@@ -66,7 +68,7 @@ This schema defines the database structure for **CuddleCare**, a childcare booki
 | emergency_name | VARCHAR   | NOT NUL                               |
 | emergency_phone| VARCHAR   | NOT NUL                               |
 | address        | VARCHAR   | NOT NULL                              |
-
+| created_at     | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP             |
 ---
 
 ### 5. Bookings
